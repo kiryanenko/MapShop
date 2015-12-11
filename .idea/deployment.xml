@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="https://github.com/kiryanenko/MapShop.git" uploadOnCheckin="e61d14a9-7433-47c3-a03e-950372684ea2">
+    <serverData>
+      <paths name="https://github.com/kiryanenko/MapShop.git">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myUploadOnCheckinName" value="https://github.com/kiryanenko/MapShop.git" />
+  </component>
+</project>
