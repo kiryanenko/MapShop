@@ -3,7 +3,7 @@ class CreateHalls < ActiveRecord::Migration
     create_table :halls do |t|
       t.string :name
       t.text :description
-      t.integer :scale
+      t.float :scale
       t.integer :shop_id
 
       t.timestamps null: false
