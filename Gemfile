@@ -47,3 +47,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # авторизация
 gem 'devise'
+
+# Materialize Sass version for Rails Asset Pipeline
+gem 'materialize-sass'
