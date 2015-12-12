@@ -1,0 +1,55 @@
+<h1>Краткий обзор</h1>
+<ul class="collapsible popout" data-collapsible="accordion">
+  <% if brands = Brand.where(user_id: current_user.id)
+       brands.each do |brand| %>
+          <li>
+            <div class="collapsible-header"><i class="material-icons">business</i><%= brand.name %></div>
+            <div class="collapsible-body">
+              <p><%= brand.description %></p>
+              <ul class="collapsible popout" data-collapsible="accordion">
+                <% if shops = Shop.where(brand_id: brand.id)
+                     shops.each do |shop| %>
+                        <li>
+                          <div class="collapsible-header">
+                            <i class="material-icons">store</i><% shop.name %>
+                          </div>
+                          <div class="collapsible-body">
+                            <p><%= shop.description %></p>
+                            <ul class="collapsible popout" data-collapsible="accordion">
+                              <% if halls = Hall.where(shop_id: shop.id)
+                                   halls.each do |hall| %>
+                                      <li>
+                                        <div class="collapsible-header">
+                                          <i class="material-icons">location_on</i><% hall.name %>
+                                        </div>
+                                        <div class="collapsible-body">
+                                          <p><%= hall.description %></p>
+                                          <ul class="collapsible popout" data-collapsible="accordion">
+                                            <% if items = Item.where(hall_id: hall.id)
+                                                 items.each do |item| %>
+                                                    <li>
+                                                      <div class="collapsible-header">
+                                                        <i class="material-icons">shopping_basket</i><% item.name %>
+                                                      </div>
+                                                      <div class="collapsible-body">
+                                                        <p><%= item.description %></p>
+                                                      </div>
+                                                    </li>
+                                                <% end %>
+                                            <% end %>
+                                          </ul>
+                                        </div>
+                                      </li>
+                                  <% end %>
+                              <% end %>
+                            </ul>
+                          </div>
+                        </li>
+                    <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </li>
+      <% end %>
+  <% end %>
+</ul>

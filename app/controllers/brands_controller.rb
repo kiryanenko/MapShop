@@ -26,7 +26,7 @@ class BrandsController < ApplicationController
   # POST /brands
   # POST /brands.json
   def create
-    @brand = Brand.new(brand_params)
+    @brand = Brand.new(brand_params) { |b| b.user_id = current_user.id }
 
     respond_to do |format|
       if @brand.save
@@ -71,6 +71,6 @@ class BrandsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def brand_params
-      params.require(:brand).permit(:name, :description, :user_id)
+      params.require(:brand).permit(:name, :description)
     end
 end
