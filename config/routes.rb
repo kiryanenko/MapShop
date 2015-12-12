@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'user/index'
+
   root 'pages#main'
 
   get 'pages/main'
