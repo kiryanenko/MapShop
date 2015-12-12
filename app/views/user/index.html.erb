@@ -1,8 +1,22 @@
 <h1>Краткий обзор</h1>
+<a class="waves-effect waves-light btn" style="margin-left: 23px;"><i class="material-icons" href="/brands/new">add</i>Создать Бренд</a>
 <ul class="collapsible popout" data-collapsible="accordion">
   <% if brands = Brand.where(user_id: current_user.id)
        brands.each do |brand| %>
           <li>
+            <div class="fixed-action-btn horizontal" style="position: relative;
+                float: right; bottom: 37px; top: 3px;">
+              <a class="btn-floating red">
+                <i class="large mdi-navigation-menu"></i>
+              </a>
+              <ul>
+                <li style="margin: 1px 15px;"><a class="btn-floating red" href="/shops/new">
+                  <i class="material-icons">add</i></a></li>
+                <li style="margin: 1px 15px;"><a class="btn-floating blue" href="/shops/<%= brand.id %>/edit">
+                  <i class="material-icons">settings</i></a></li>
+              </ul>
+            </div>
+
             <div class="collapsible-header"><i class="material-icons">business</i><%= brand.name %></div>
             <div class="collapsible-body">
               <p><%= brand.description %></p>
@@ -10,6 +24,19 @@
                 <% if shops = Shop.where(brand_id: brand.id)
                      shops.each do |shop| %>
                         <li>
+                          <div class="fixed-action-btn horizontal" style="position: relative;
+                              float: right; bottom: 37px; top: 3px;">
+                            <a class="btn-floating red">
+                              <i class="large mdi-navigation-menu"></i>
+                            </a>
+                            <ul>
+                              <li style="margin: 1px 15px;"><a class="btn-floating red" href="/halls/new">
+                                <i class="material-icons">add</i></a></li>
+                              <li style="margin: 1px 15px;"><a class="btn-floating blue" href="/shops/<%= shop.id %>/edit">
+                                <i class="material-icons">settings</i></a></li>
+                            </ul>
+                          </div>
+
                           <div class="collapsible-header">
                             <i class="material-icons">store</i><% shop.name %>
                           </div>
