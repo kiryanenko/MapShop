@@ -1,6 +1,8 @@
 class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
+  before_filter :authenticate_user!, except: [:show, :index]
+
   # GET /shops
   # GET /shops.json
   def index
