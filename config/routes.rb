@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  root 'pages#main'
+
+  get 'pages/main'
+
   resources :items
   resources :halls
   resources :shops
