@@ -26,7 +26,10 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    @shop = Shop.new(shop_params)
+    @shop = Shop.new(shop_params) do |s|
+      mas = Brand.where(user_id: current_user.id)
+      s.brand_id = params[:brand_id] if mas.include? params[:brand_id]
+    end
 
     respond_to do |format|
       if @shop.save
@@ -71,6 +74,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :location, :brand_id)
+      params.require(:shop).permit(:name, :description, :location)
     end
 end

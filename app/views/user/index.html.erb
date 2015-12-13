@@ -1,5 +1,5 @@
 <h1>Краткий обзор</h1>
-<a class="waves-effect waves-light btn" style="margin-left: 23px;"><i class="material-icons" href="/brands/new">add</i>Создать Бренд</a>
+<a class="waves-effect waves-light btn" style="margin-left: 23px;" href="/brands/new"><i class="material-icons">add</i>Создать Бренд</a>
 <ul class="collapsible popout" data-collapsible="accordion">
   <% if brands = Brand.where(user_id: current_user.id)
        brands.each do |brand| %>
@@ -38,7 +38,7 @@
                           </div>
 
                           <div class="collapsible-header">
-                            <i class="material-icons">store</i><% shop.name %>
+                            <i class="material-icons">store</i><%= shop.name %>
                           </div>
                           <div class="collapsible-body">
                             <p><%= shop.description %></p>
@@ -47,7 +47,7 @@
                                    halls.each do |hall| %>
                                       <li>
                                         <div class="collapsible-header">
-                                          <i class="material-icons">location_on</i><% hall.name %>
+                                          <i class="material-icons">location_on</i><%= hall.name %>
                                         </div>
                                         <div class="collapsible-body">
                                           <p><%= hall.description %></p>
@@ -56,7 +56,7 @@
                                                  items.each do |item| %>
                                                     <li>
                                                       <div class="collapsible-header">
-                                                        <i class="material-icons">shopping_basket</i><% item.name %>
+                                                        <i class="material-icons">shopping_basket</i><%= item.name %>
                                                       </div>
                                                       <div class="collapsible-body">
                                                         <p><%= item.description %></p>
