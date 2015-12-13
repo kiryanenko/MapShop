@@ -26,22 +26,30 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @item = Item.new(item_params)
+    hall_id = item_params[:hall_id]
+    if hall_id.nil? ? false : Brand.find_by_id(
+        Shop.find_by_id(Hall.find_by_id(hall_id).shop_id).brand_id).user_id == current_user.id
+      @item = Item.new(item_params)
 
-    respond_to do |format|
-      if @item.save
-        format.html { redirect_to @item, notice: 'Item was successfully created.' }
-        format.json { render :show, status: :created, location: @item }
-      else
-        format.html { render :new }
-        format.json { render json: @item.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @item.save
+          format.html { redirect_to @item, notice: 'Item was successfully created.' }
+          format.json { render :show, status: :created, location: @item }
+        else
+          format.html { render :new }
+          format.json { render json: @item.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      # неправильный hall_id
+      redirect_to '/user/index'
     end
   end
 
   # PATCH/PUT /items/1
   # PATCH/PUT /items/1.json
   def update
+    item_params = params.require(:item).permit(:name, :description, :x, :y)
     respond_to do |format|
       if @item.update(item_params)
         format.html { redirect_to @item, notice: 'Item was successfully updated.' }
