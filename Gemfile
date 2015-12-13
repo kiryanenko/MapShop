@@ -50,3 +50,6 @@ gem 'devise'
 
 # Materialize Sass version for Rails Asset Pipeline
 gem 'materialize-sass'
+
+# изображения
+gem 'paperclip'

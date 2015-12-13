@@ -14,7 +14,7 @@
   <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">MapShop</a>
     <ul class="right hide-on-med-and-down">
       <% if user_signed_in? %>
-          <li>Здравствуйте, <%= current_user.email %></li>
+          <li><%= link_to "Здравствуйте, #{current_user.email}", '/user/index' %></li>
       <% end %>
       <li><a href="#">Navbar Link</a></li>
       <!-- ссылки для входа и регистрации -->
