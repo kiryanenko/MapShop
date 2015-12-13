@@ -26,16 +26,22 @@ class HallsController < ApplicationController
   # POST /halls
   # POST /halls.json
   def create
-    @hall = Hall.new(hall_params)
+    shop_id = shop_params[:shop_id]
+    if Brand.find_by_id(Shop.find_by_id(shop_id).brand_id).user_id == current_user.id
+      @hall = Hall.new(hall_params)
 
-    respond_to do |format|
-      if @hall.save
-        format.html { redirect_to @hall, notice: 'Hall was successfully created.' }
-        format.json { render :show, status: :created, location: @hall }
-      else
-        format.html { render :new }
-        format.json { render json: @hall.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @hall.save
+          format.html { redirect_to @hall, notice: 'Hall was successfully created.' }
+          format.json { render :show, status: :created, location: @hall }
+        else
+          format.html { render :new }
+          format.json { render json: @hall.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      # неправильный shop_id
+      redirect_to '/shops/index'
     end
   end
 
