@@ -26,8 +26,8 @@ class HallsController < ApplicationController
   # POST /halls
   # POST /halls.json
   def create
-    shop_id = shop_params[:shop_id]
-    if Brand.find_by_id(Shop.find_by_id(shop_id).brand_id).user_id == current_user.id
+    shop_id = hall_params[:shop_id]
+    if shop_id.nil? ? false : Brand.find_by_id(Shop.find_by_id(shop_id).brand_id).user_id == current_user.id
       @hall = Hall.new(hall_params)
 
       respond_to do |format|
@@ -48,7 +48,7 @@ class HallsController < ApplicationController
   # PATCH/PUT /halls/1
   # PATCH/PUT /halls/1.json
   def update
-    hall_params[:shop_id] = @hall.shop_id
+    hall_params = params.require(:hall).permit(:name, :description, :scale, :items_url)
     respond_to do |format|
       if @hall.update(hall_params)
         format.html { redirect_to @hall, notice: 'Hall was successfully updated.' }

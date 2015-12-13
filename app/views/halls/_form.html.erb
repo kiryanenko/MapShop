@@ -1,4 +1,5 @@
 <%= form_for(@hall) do |f| %>
+    <%= f.hidden_field(:shop_id, :value => params[:shop_id]) %>
   <% if @hall.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@hall.errors.count, "error") %> prohibited this hall from being saved:</h2>
