@@ -26,18 +26,18 @@ class ShopsController < ApplicationController
   # POST /shops
   # POST /shops.json
   def create
-    @shop = Shop.new(shop_params) do |s|
-      mas = Brand.where(user_id: current_user.id)
-      s.brand_id = params[:brand_id] if mas.include? params[:brand_id]
-    end
+    brand_id = shop_params[:brand_id]
+    if Brand.find_by_id(brand_id).user_id == current_user.id
+      @shop = Shop.new(shop_params)
 
-    respond_to do |format|
-      if @shop.save
-        format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
-        format.json { render :show, status: :created, location: @shop }
-      else
-        format.html { render :new }
-        format.json { render json: @shop.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @shop.save
+          format.html { redirect_to @shop, notice: 'Shop was successfully created.' }
+          format.json { render :show, status: :created, location: @shop }
+        else
+          format.html { render :new }
+          format.json { render json: @shop.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -74,6 +74,6 @@ class ShopsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def shop_params
-      params.require(:shop).permit(:name, :description, :location)
+      params.require(:shop).permit(:name, :description, :location, :brand_id)
     end
 end
