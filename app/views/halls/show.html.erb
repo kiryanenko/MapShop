@@ -1,24 +1,35 @@
 <p id="notice"><%= notice %></p>
+<% shop = Shop.find_by_id(@hall.shop_id)
+   brand = Brand.find_by_id(shop.brand_id) %>
+<h1><%= brand.name %></h1>
+<h2><%= shop.name %></h2>
+<h3><%= @hall.name %></h3>
 
-<p>
-  <strong>Name:</strong>
-  <%= @hall.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+<blockquote>
+  <b>Описание:</b>
   <%= @hall.description %>
-</p>
+</blockquote>
 
 <p>
-  <strong>Scale:</strong>
+  <b>Масштаб:</b>
   <%= @hall.scale %>
 </p>
-
-<p>
-  <strong>Shop:</strong>
-  <%= @hall.shop_id %>
-</p>
+<h4>Карта:</h4>
+<h4>Товары:</h4>
+<ul class="collapsible popout" data-collapsible="accordion">
+  <% if items = Item.where(hall_id: @hall.id)
+       items.each do |item| %>
+          <li>
+            <div class="collapsible-header">
+              <i class="material-icons">shopping_basket</i><%= item.name %>
+            </div>
+            <div class="collapsible-body">
+              <p><%= item.description %></p>
+            </div>
+          </li>
+      <% end %>
+  <% end %>
+</ul>
 
 <%= link_to 'Edit', edit_hall_path(@hall) %> |
 <%= link_to 'Back', halls_path %>
