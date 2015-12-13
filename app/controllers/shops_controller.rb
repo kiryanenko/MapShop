@@ -39,6 +39,9 @@ class ShopsController < ApplicationController
           format.json { render json: @shop.errors, status: :unprocessable_entity }
         end
       end
+    else
+      # неправильный brand_id
+      redirect_to '/shops/index'
     end
   end
 
