@@ -48,6 +48,7 @@ class HallsController < ApplicationController
   # PATCH/PUT /halls/1
   # PATCH/PUT /halls/1.json
   def update
+    hall_params[:shop_id] = @hall.shop_id
     respond_to do |format|
       if @hall.update(hall_params)
         format.html { redirect_to @hall, notice: 'Hall was successfully updated.' }
