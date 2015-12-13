@@ -27,7 +27,7 @@ class ShopsController < ApplicationController
   # POST /shops.json
   def create
     brand_id = shop_params[:brand_id]
-    if Brand.find_by_id(brand_id).user_id == current_user.id
+    if brand_id.nil? ? false : Brand.find_by_id(brand_id).user_id == current_user.id
       @shop = Shop.new(shop_params)
 
       respond_to do |format|
@@ -48,7 +48,7 @@ class ShopsController < ApplicationController
   # PATCH/PUT /shops/1
   # PATCH/PUT /shops/1.json
   def update
-    shop_params[:brand_id] = @shop.brand_id
+    shop_params = params.require(:shop).permit(:name, :description, :location)
     respond_to do |format|
       if @shop.update(shop_params)
         format.html { redirect_to @shop, notice: 'Shop was successfully updated.' }
