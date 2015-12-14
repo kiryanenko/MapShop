@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151212101321) do
+ActiveRecord::Schema.define(version: 20151213194104) do
 
   create_table "brands", force: :cascade do |t|
     t.string   "name"
@@ -26,9 +26,13 @@ ActiveRecord::Schema.define(version: 20151212101321) do
     t.text     "description"
     t.float    "scale"
     t.integer  "shop_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "items_url"
+    t.string   "map_file_name"
+    t.string   "map_content_type"
+    t.integer  "map_file_size"
+    t.datetime "map_updated_at"
   end
 
   create_table "items", force: :cascade do |t|

@@ -48,7 +48,7 @@ class HallsController < ApplicationController
   # PATCH/PUT /halls/1
   # PATCH/PUT /halls/1.json
   def update
-    hall_params = params.require(:hall).permit(:name, :description, :scale, :items_url)
+    hall_params = params.require(:hall).permit(:name, :description, :scale, :items_url, :map)
     respond_to do |format|
       if @hall.update(hall_params)
         format.html { redirect_to @hall, notice: 'Hall was successfully updated.' }
@@ -78,6 +78,6 @@ class HallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hall_params
-      params.require(:hall).permit(:name, :description, :scale, :items_url, :shop_id)
+      params.require(:hall).permit(:name, :description, :scale, :items_url, :shop_id, :map)
     end
 end

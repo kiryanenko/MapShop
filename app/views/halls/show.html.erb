@@ -15,6 +15,7 @@
   <%= @hall.scale %>
 </p>
 <h4>Карта:</h4>
+<%= image_tag @hall.map.url %>
 <h4>Товары:</h4>
 <ul class="collapsible popout" data-collapsible="accordion">
   <% if items = Item.where(hall_id: @hall.id)
