@@ -1,38 +1,45 @@
 <%= form_for(@item) do |f| %>
     <%= f.hidden_field(:hall_id, :value => params[:hall_id]) %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+    <% if @item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-      <% @item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @item.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <div class="row">
+      <div class="col s12 m4 l3">
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :description %><br>
+          <%= f.text_area :description %>
+        </div>
+        <div class="field">
+          <%= f.label :image %><br>
+          <%= f.file_field :image %>
+        </div>
+        <div class="field">
+          <%= f.label :x %><br>
+          <%= f.text_field :x %>
+        </div>
+        <div class="field">
+          <%= f.label :y %><br>
+          <%= f.text_field :y %>
+        </div>
+        <div class="actions">
+          <%= f.submit %>
+        </div>
+      </div>
+      <div class="col s12 m8 l9">
+        <h4>На карте:</h4>
+        <%= image_tag Hall.find_by_id(@item.hall_id).map.url %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-    <div class="field">
-      <%= f.label :image %><br>
-      <%= f.file_field :image %>
-    </div>
-  <div class="field">
-    <%= f.label :x %><br>
-    <%= f.text_field :x %>
-  </div>
-  <div class="field">
-    <%= f.label :y %><br>
-    <%= f.text_field :y %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
