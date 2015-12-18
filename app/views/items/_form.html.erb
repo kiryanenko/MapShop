@@ -27,11 +27,11 @@
         </div>
         <div class="field">
           <%= f.label :x %><br>
-          <%= f.text_field :x %>
+          <%= f.text_field :x, id: 'field_x' %>
         </div>
         <div class="field">
           <%= f.label :y %><br>
-          <%= f.text_field :y %>
+          <%= f.text_field :y, id: 'field_y' %>
         </div>
         <div class="actions">
           <%= f.submit %>
@@ -39,7 +39,8 @@
       </div>
       <div class="col s12 m8 l9">
         <h4>На карте:</h4>
-        <%= image_tag Hall.find_by_id(@item.hall_id).map.url %>
+        <% hall = Hall.find_by_id(@item.hall_id) %>
+        <%= image_tag hall.map.url, onclick: "coords(this, #{hall.scale})" %>
       </div>
     </div>
 <% end %>
