@@ -1,38 +1,47 @@
 <%= form_for(@hall) do |f| %>
     <%= f.hidden_field(:shop_id, :value => params[:shop_id]) %>
-  <% if @hall.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@hall.errors.count, "error") %> prohibited this hall from being saved:</h2>
+    <% if @hall.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@hall.errors.count, "error") %> prohibited this hall from being saved:</h2>
 
-      <ul>
-      <% @hall.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @hall.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :scale %><br>
-    <%= f.number_field :scale %>
-  </div>
     <div class="field">
-      <%= f.label :map %><br>
-      <%= f.file_field :map %>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
     </div>
-  <div class="field">
-    <%= f.label :items_url %><br>
-    <%= f.text_field :items_url %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file">
+      </div>
+      <div class="file-path-wrapper">
+        <%= f.file_field :map, class: "file-path validate", type: "text", placeholder: 'Файл с изображением карты' %>
+      </div>
+    </div>
+
+    <div class="field">
+      <a class="tooltipped" data-position="left" data-delay="50" data-tooltip="Количество пикселей в 1 метре">
+        <%= f.label :scale %><br>
+        <%= f.number_field :scale %>
+      </a>
+    </div>
+    <div class="field">
+      <%= f.label :items_url %><br>
+      <%= f.text_field :items_url, placeholder: 'Количество пикселей в 1 метре'  %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
