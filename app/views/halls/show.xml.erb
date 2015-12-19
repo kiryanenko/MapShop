@@ -1,5 +1,6 @@
 <% shop = Shop.find_by_id(@hall.shop_id)
-   brand = Brand.find_by_id(shop.brand_id) %>
+   brand = Brand.find_by_id(shop.brand_id)
+   url = 'http://localhost:3000' %>
 <?xml version="1.0" encoding="UTF-8" ?>
 <hall>
   <brand>
@@ -14,7 +15,8 @@
 
   <name><%= @hall.name %></name>
   <description><%= @hall.description %></description>
-  <map><%= @hall.map.url %></map>
+  <map><%= url + @hall.map.url %></map>
+  <scale><%= @hall.scale %></scale>
 
   <items>
     <% if items = Item.where(hall_id: @hall.id)
@@ -22,7 +24,7 @@
         <item>
           <name><%= item.name %></name>
           <description><%= item.description %></description>
-          <image><%= 'http://localhost:3000' + item.image.url %></image>
+          <image><%= url + item.image.url %></image>
           <x><%= item.x %></x>
           <y><%= item.y %></y>
         </item>
