@@ -19,9 +19,9 @@
   </div>
   <div class="col s12 m8 l9">
     <h4>Карта:</h4>
-    <div style="position: absolute;">
+    <div style="position: relative;">
       <%= image_tag @hall.map.url%>
-      <%= image_tag 'marker.png', id: 'marker', hidden: 'true', style: 'position: absolute;' %>
+      <%= image_tag 'marker.png', id: 'marker', style: 'position: absolute; display: none' %>
     </div>
   </div>
 </div>
@@ -31,7 +31,8 @@
     <div class="row">
       <% if items = Item.where(hall_id: @hall.id)
            items.each do |item| %>
-              <div class="col s12 m4" onclick="setMarker(<%= item.x * @hall.scale %>, <%= item.y * @hall.scale %>)">
+              <div class="col s12 m4" onMouseOver="mouseOver(this)" onMouseOut="mouseOut(this)"
+                   onclick="setMarkerHall(<%= item.x * @hall.scale %>, <%= item.y * @hall.scale %>)">
                 <%= image_tag item.image.url %>
                 <h5><i class="material-icons">shopping_basket</i><%= item.name %></h5>
                 <p><%= item.description %></p>
