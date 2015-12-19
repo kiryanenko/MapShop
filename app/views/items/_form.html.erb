@@ -40,7 +40,7 @@
       <div class="col s12 m8 l9">
         <h4>На карте:</h4>
         <% hall = Hall.find_by_id(@item.hall_id) %>
-        <%= image_tag hall.map.url, onclick: "coords(this, #{hall.scale})" %>
+        <%= image_tag hall.map.url, onclick: "coords(event, this, #{hall.scale})" %>
       </div>
     </div>
 <% end %>
