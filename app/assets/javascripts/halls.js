@@ -5,7 +5,8 @@ function setMarkerHall(x, y) {
     marker.style.top  = (y - 24) + 'px';
 }
 
-function mouseOver(el) {
+function mouseOver(el, x, y) {
+    setMarkerHall(x, y);
     el.style.backgroundColor = "cornsilk";
 }
 function mouseOut(el) {

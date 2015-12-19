@@ -31,8 +31,8 @@
     <div class="row">
       <% if items = Item.where(hall_id: @hall.id)
            items.each do |item| %>
-              <div class="col s12 m4" onMouseOver="mouseOver(this)" onMouseOut="mouseOut(this)"
-                   onclick="setMarkerHall(<%= item.x * @hall.scale %>, <%= item.y * @hall.scale %>)">
+              <div class="col s12 m4" onMouseOut="mouseOut(this)"
+                   onMouseOver="mouseOver(this, <%= item.x * @hall.scale %>, <%= item.y * @hall.scale %>)">
                 <%= image_tag item.image.url %>
                 <h5><i class="material-icons">shopping_basket</i><%= item.name %></h5>
                 <p><%= item.description %></p>
