@@ -19,7 +19,10 @@
   </div>
   <div class="col s12 m8 l9">
     <h4>Карта:</h4>
-    <%= image_tag @hall.map.url %>
+    <div style="position: absolute;">
+      <%= image_tag @hall.map.url%>
+      <%= image_tag 'marker.png', id: 'marker', hidden: 'true', style: 'position: absolute;' %>
+    </div>
   </div>
 </div>
 <ul class="collapsible popout" data-collapsible="accordion"><li>
@@ -28,8 +31,8 @@
     <div class="row">
       <% if items = Item.where(hall_id: @hall.id)
            items.each do |item| %>
-              <div class="col s12 m4">
-                <%= image_tag item.image.url(:thumb) %>
+              <div class="col s12 m4" onclick="setMarker(<%= item.x * @hall.scale %>, <%= item.y * @hall.scale %>)">
+                <%= image_tag item.image.url %>
                 <h5><i class="material-icons">shopping_basket</i><%= item.name %></h5>
                 <p><%= item.description %></p>
               </div>
