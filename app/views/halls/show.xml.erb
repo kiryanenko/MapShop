@@ -1,0 +1,32 @@
+<% shop = Shop.find_by_id(@hall.shop_id)
+   brand = Brand.find_by_id(shop.brand_id) %>
+<?xml version="1.0" encoding="UTF-8" ?>
+<hall>
+  <brand>
+    <name><%= brand.name %></name>
+    <description><%= brand.description %></description>
+  </brand>
+  <shop>
+    <name><%= shop.name %></name>
+    <description><%= shop.description %></description>
+    <location><%= shop.location %></location>
+  </shop>
+
+  <name><%= @hall.name %></name>
+  <description><%= @hall.description %></description>
+  <map><%= @hall.map.url %></map>
+
+  <items>
+    <% if items = Item.where(hall_id: @hall.id)
+      items.each do |item| %>
+        <item>
+          <name><%= item.name %></name>
+          <description><%= item.description %></description>
+          <image><%= 'http://localhost:3000' + item.image.url %></image>
+          <x><%= item.x %></x>
+          <y><%= item.y %></y>
+        </item>
+      <% end %>
+    <% end %>
+  </items>
+</hall>
