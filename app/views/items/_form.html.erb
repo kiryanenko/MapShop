@@ -1,3 +1,4 @@
+<% hall = Hall.find_by_id(@item.hall_id) %>
 <%= form_for(@item) do |f| %>
     <%= f.hidden_field(:hall_id, :value => params[:hall_id]) %>
     <% if @item.errors.any? %>
@@ -27,11 +28,11 @@
         </div>
         <div class="field">
           <%= f.label :x %><br>
-          <%= f.text_field :x, id: 'field_x' %>
+          <%= f.text_field :x, id: 'field_x', oninput: "setMarker(this.value * #{hall.scale})" %>
         </div>
         <div class="field">
           <%= f.label :y %><br>
-          <%= f.text_field :y, id: 'field_y' %>
+          <%= f.text_field :y, id: 'field_y', oninput: "setMarker(undefined, this.value * #{hall.scale})" %>
         </div>
         <div class="actions">
           <%= f.submit %>
@@ -39,8 +40,11 @@
       </div>
       <div class="col s12 m8 l9">
         <h4>На карте:</h4>
-        <% hall = Hall.find_by_id(@item.hall_id) %>
-        <%= image_tag hall.map.url, onclick: "coords(event, this, #{hall.scale})" %>
+        <div style="position: absolute;">
+          <%= image_tag hall.map.url, onclick: "coords(event, this, #{hall.scale})", id: 'map_id' %>
+          <%= image_tag 'marker.png', id: 'marker',
+                        style: "position: absolute; left: #{@item.x * hall.scale}px; top: #{@item.y * hall.scale}px;" %>
+        </div>
       </div>
     </div>
 <% end %>
