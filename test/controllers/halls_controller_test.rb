@@ -2,7 +2,9 @@ require 'test_helper'
 
 class HallsControllerTest < ActionController::TestCase
   setup do
-    @hall = halls(:one)
+    @brand = Brand.create()
+    @shop = Shop.create(brand_id: @brand.id)
+    @hall = Hall.create(scale: 1, shop_id: @shop.id, items_url: '')
   end
 
   test "should get index" do
@@ -11,39 +13,18 @@ class HallsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:halls)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create hall" do
-    assert_difference('Hall.count') do
-      post :create, hall: { description: @hall.description, name: @hall.name, scale: @hall.scale, shop_id: @hall.shop_id }
-    end
-
-    assert_redirected_to hall_path(assigns(:hall))
-  end
-
-  test "should show hall" do
+  test "should get show" do
     get :show, id: @hall
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @hall
-    assert_response :success
+  test "should get format html" do
+    get :show, id: @hall
+    assert_select 'html', true
   end
 
-  test "should update hall" do
-    patch :update, id: @hall, hall: { description: @hall.description, name: @hall.name, scale: @hall.scale, shop_id: @hall.shop_id }
-    assert_redirected_to hall_path(assigns(:hall))
-  end
-
-  test "should destroy hall" do
-    assert_difference('Hall.count', -1) do
-      delete :destroy, id: @hall
-    end
-
-    assert_redirected_to halls_path
+  test "should get format xml" do
+    get :show, id: @hall, format: 'xml'
+    assert_select 'hall', true
   end
 end

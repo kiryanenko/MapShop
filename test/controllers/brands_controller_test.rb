@@ -11,39 +11,8 @@ class BrandsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:brands)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create brand" do
-    assert_difference('Brand.count') do
-      post :create, brand: { description: @brand.description, name: @brand.name, user_id: @brand.user_id }
-    end
-
-    assert_redirected_to brand_path(assigns(:brand))
-  end
-
   test "should show brand" do
     get :show, id: @brand
     assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @brand
-    assert_response :success
-  end
-
-  test "should update brand" do
-    patch :update, id: @brand, brand: { description: @brand.description, name: @brand.name, user_id: @brand.user_id }
-    assert_redirected_to brand_path(assigns(:brand))
-  end
-
-  test "should destroy brand" do
-    assert_difference('Brand.count', -1) do
-      delete :destroy, id: @brand
-    end
-
-    assert_redirected_to brands_path
   end
 end

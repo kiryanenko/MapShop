@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class HallTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test 'should not save string scale' do
+    rec = Hall.new(scale: 'kgui')
+    assert !rec.save
+  end
 end
