@@ -78,6 +78,7 @@ class HallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hall_params
+      if params[:hall][:items_url] == '' then params[:hall][:items_url] = nil end
       params.require(:hall).permit(:name, :description, :scale, :items_url, :shop_id, :map)
     end
 end
