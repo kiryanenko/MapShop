@@ -22,3 +22,5 @@
 en:
   hello: "Hello"
   exit: "Exit"
+  sign_in: "sign in"
+  sign_up: "sign up"

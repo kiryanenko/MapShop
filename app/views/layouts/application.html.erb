@@ -22,13 +22,13 @@
       <% if user_signed_in? %>
           <li><%= link_to "#{t('hello')}, #{current_user.email}", '/user/index' %></li>
       <% end %>
-      <li><a class="dropdown-button" href="#!" data-activates="Language">Language<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-button"  data-activates="Language">Language<i class="material-icons right">arrow_drop_down</i></a></li>
       <!-- ссылки для входа и регистрации -->
       <% if user_signed_in? %>
           <li><%= link_to t('exit'), destroy_user_session_path, :method => :delete %></li>
       <% else %>
-          <li><%= link_to 'Регистрация', new_user_registration_path %></li>
-          <li><%= link_to 'Вход', new_user_session_path, class: "waves-effect waves-light btn"%></li>
+          <li><%= link_to t('sign_up'), new_user_registration_path %></li>
+          <li><%= link_to t('sign_in'), new_user_session_path, class: "waves-effect waves-light btn"%></li>
       <% end %>
     </ul>
 
