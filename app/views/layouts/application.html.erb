@@ -10,36 +10,28 @@
 </head>
 <body>
 
+<!-- Dropdown Structure -->
+<ul id="Language" class="dropdown-content">
+  <li><a href="?locale=en">English</a></li>
+  <li><a href="?locale=ru">Русский</a></li>
+</ul>
+
 <nav class="light-blue lighten-1" role="navigation">
   <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">MapShop</a>
     <ul class="right hide-on-med-and-down">
       <% if user_signed_in? %>
-          <li><%= link_to "Здравствуйте, #{current_user.email}", '/user/index' %></li>
+          <li><%= link_to "#{t('hello')}, #{current_user.email}", '/user/index' %></li>
       <% end %>
       <li><a href="#">Navbar Link</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="Language">Language<i class="material-icons right">arrow_drop_down</i></a></li>
       <!-- ссылки для входа и регистрации -->
       <% if user_signed_in? %>
-          <li><%= link_to 'Выход', destroy_user_session_path, :method => :delete %></li>
+          <li><%= link_to t('exit'), destroy_user_session_path, :method => :delete %></li>
       <% else %>
           <li><%= link_to 'Регистрация', new_user_registration_path %></li>
           <li><%= link_to 'Вход', new_user_session_path, class: "waves-effect waves-light btn"%></li>
       <% end %>
     </ul>
-
-    <ul id="nav-mobile" class="side-nav">
-      <li><a href="#">Navbar Link</a></li>
-      <li>
-        <!-- ссылки для входа и регистрации -->
-        <% if user_signed_in? %>
-            <span>Здравствуйте, <%= current_user.email %></span>
-            <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
-        <% else %>
-            <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
-        <% end %>
-      </li>
-    </ul>
-
-
 
     <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
   </div>
