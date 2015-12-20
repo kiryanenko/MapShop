@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'nokogiri'
+
 class HallsController < ApplicationController
   before_action :set_hall, only: [:show, :edit, :update, :destroy]
 
@@ -12,6 +15,32 @@ class HallsController < ApplicationController
   # GET /halls/1
   # GET /halls/1.json
   def show
+    if @hall.items_url != ''
+      xml = open(@hall.items_url)
+      @items = Nokogiri::XML(xml).xpath('/items/item').map do |item|
+        p item
+        {
+            name: item.xpath('name/text()').to_s,
+            description: item.xpath('description/text()').to_s,
+            x: item.xpath('x/text()').to_s.to_i,
+            y: item.xpath('y/text()').to_s.to_i,
+            image: item.xpath('image/text()').to_s
+        }
+      end
+    else
+      @items = Item.where(hall_id: @hall.id)
+      unless @items
+        @items = @items.map do |item|
+          {
+              name: item.name,
+              description: item.description,
+              x: item.x,
+              y: item.y,
+              image: item.image.url
+          }
+        end
+      end
+    end
   end
 
   # GET /halls/new
@@ -78,7 +107,6 @@ class HallsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def hall_params
-      if params[:hall][:items_url] == '' then params[:hall][:items_url] = nil end
       params.require(:hall).permit(:name, :description, :scale, :items_url, :shop_id, :map)
     end
 end

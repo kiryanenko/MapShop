@@ -53,3 +53,5 @@ gem 'materialize-sass'
 
 # изображения
 gem 'paperclip'
+
+gem 'nokogiri'
